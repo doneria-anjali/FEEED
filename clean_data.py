@@ -77,7 +77,7 @@ def create_final_df(record):
     return df
     
     
-def add_purchase_to_table(df, engine, final_name):
+def add_to_table(df, engine, final_name):
     df.to_sql(name=final_name, con=engine, if_exists='append', index=False)
 
 
@@ -87,10 +87,46 @@ def clean_purchase_data():
     
     for count in range(len(purchase_data_df)):
         record = purchase_data_df.iloc[count]
-        #print(record)
         df = create_final_df(record)
-        #print(df)
-        add_purchase_to_table(df, engine, 'purchase_data')
-        print("Inserted " + str(count+1) + " records")
+        add_to_table(df, engine, 'purchase_data')
         
-clean_purchase_data()
+    print("Finished inserting data to purchase_data")
+        
+def clean_distribution_data():
+    dist_data_df, engine = read_table('distribution_data_0617')
+    print("Records fetched = " + str(len(dist_data_df)))
+    
+    for count in range(len(dist_data_df)):
+        record = dist_data_df.iloc[count]
+        df = create_final_df(record)
+        add_to_table(df, engine, 'distribution_data')
+        
+    print("Finished inserting data to distribution_data")
+    
+def clean_transfer_data():
+    dist_data_df, engine = read_table('transfer_data_0617')
+    print("Records fetched = " + str(len(dist_data_df)))
+    
+    for count in range(len(dist_data_df)):
+        record = dist_data_df.iloc[count]
+        df = create_final_df(record)
+        add_to_table(df, engine, 'transfer_data')
+        
+    print("Finished inserting data to transfer_data")
+    
+def clean_all_data():
+    dist_data_df, engine = read_table('FY_data_0617')
+    print("Records fetched = " + str(len(dist_data_df)))
+    
+    for count in range(len(dist_data_df)):
+        record = dist_data_df.iloc[count]
+        df = create_final_df(record)
+        add_to_table(df, engine, 'FY_data')
+        
+    print("Finished inserting data to FY_data")
+    
+        
+#clean_purchase_data()
+#clean_distribution_data()
+#clean_transfer_data()
+#clean_all_data()
