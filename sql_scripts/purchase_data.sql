@@ -55,3 +55,6 @@ FROM FEEED_data1.purchase_data_0617
 where Posting_Date like '%2008%' and FBC_Donor_Class_of_Trade like '%Don%'
 group by Posting_Date, FBC_Donor_Class_of_Trade
 order by Posting_Date;
+
+SELECT * FROM FEEED_data1.purchase_data_0617 
+where FBC_Donor_Class_of_Trade like '%Ven%' and Quantity > 0;
