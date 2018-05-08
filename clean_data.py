@@ -46,7 +46,9 @@ def create_final_df(record):
     
     source_posting_grp = record['Source_Posting_Group'].lower().replace("\"", "").strip()
     
-    source_type = record['Source_Type'].lower().replace("\"", "").strip()
+    source_type = record['Source_Type']
+    if source_type is not None:
+        source_type = source_type.lower().replace("\"", "").strip()
     
     branch_code = record['Branch_Code'].lower().replace("\"", "").strip()
     
